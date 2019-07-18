@@ -1,0 +1,50 @@
+<div id="message">Please insert your number</div>
+<input type="number" id="yourInputId">
+<button id="guessButton">Guess</button>
+<div>PAST_RESULT: </div>
+<div id="pastR"></div>
+<script>
+var min=0; 
+var max=10;  
+var random = Math.floor(Math.random() * (+max - + min)) + +min;
+var pastResult = "";
+var count = 10;
+var flag = 0;
+let button = document.getElementById('guessButton');
+button.addEventListener('click', function() {
+console.log(random);
+
+count--;
+let userGuess = document.getElementById('yourInputId').value;
+if(userGuess<random)
+{
+  document.getElementById('message').innerHTML = 'Sorry your guess is too low. You have '+count+' left';
+  document.getElementById('message').style.backgroundColor = "red";
+  
+}
+else
+{
+	if(userGuess>random)
+	{
+	
+		document.getElementById('message').innerHTML = 'Sorry your guess is too high. You have '+count+' left';
+		document.getElementById('message').style.backgroundColor = "red";
+	}
+	else
+	{
+		document.getElementById('message').innerHTML = "Congratulations!! You guessed correctly.";
+		document.getElementById('message').style.backgroundColor = "green";
+		button.setAttribute('disabled','disabled');
+		
+	}	
+}
+pastResult = pastResult + userGuess + '<br>';
+document.getElementById('pastR').innerHTML = pastResult;
+
+if(count==0)
+{
+alert("You lose. Click to retry");
+location.reload();
+}
+});
+</script>
